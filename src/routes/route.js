@@ -80,7 +80,7 @@ let arrayOfobj = [{
 router.get('/films',function(req,res){
 
   res.send(arrayOfobj)
-  
+
 });
 
 
@@ -100,9 +100,48 @@ router.get('/films/:filmId',function(req,res){
 
 });
 
+//finding an missing number from array 
+
+router.get('/missingnumber',function(req,res){
+
+
+  // res.send("This is missing number API")
+
+  const arr = [1,2,3,4,5,7,8,9]
+   
+  let n = arr.length;
+  let sum = 0;
+  let nanture = (n+1)*(n+2)/2;
+
+  for(let i=0;i<arr.length;i++)
+   {     
+        sum +=arr[i];
+  }
+    
+ MISNUM = nanture - sum
+//console.log(MISNUM);
+
+res.send("Missing Number : "+ (MISNUM).toString());
+
+});
+
+router.get('/missingrandom',function(req,res){
+
+     const arr = [33,34,35,37,38,39]
+});
+
+
+router.post("/postAPI",function(req,res)
+{
+      res.send({msg :" Hii"})   
+      let i = req.body 
+      console.log(i)
+
+});
 
 
 
 
 module.exports = router;
 // adding this comment for no reason
+
