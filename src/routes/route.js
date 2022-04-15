@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
-// const UserController= require("../controllers/userController")
+const UserModel = require("../models/userModel.js")
+const UserController = require("../controller/usercontroller.js")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
@@ -9,6 +9,8 @@ router.get("/test-me", function (req, res) {
 
 
 
+router.post('/createuser', UserController.createuserData)
+router.get('/getuserdata', UserController.findUser)
 
 
 
@@ -18,8 +20,5 @@ router.get("/test-me", function (req, res) {
 
 
 
-
-// router.post("/createUser", UserController.createUser)
-// router.get("/getUsersData", UserController.getUsersData)
 
 module.exports = router;
