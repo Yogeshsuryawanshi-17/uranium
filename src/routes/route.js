@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
-//const BookController= require("../controllers/bookController")
+const productcontoller= require("../controllers/productcontoller")
+const OrderController = require("../controllers/OrderController")
+const middlewareController = require("../middlewares/commonMiddlewares")
+
+
 
 
 router.get("/test-me", function (req, res) {
@@ -41,14 +44,33 @@ router.get("/test-me", function (req, res) {
 
 
 
-router.get("/basicRoute", UserController.basicCode)
-router.post('/create-a-user', UserController.createAUser)
-
-
-
+// router.get("/basicRoute", UserController.basicCode)
 // router.get("/basicRoute2", commonMW.mid1, UserController.basicCode2)
 // router.get("/basicRoute3", commonMW.mid2, UserController.basicCode3)
 // router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
+
+
+
+
+
+
+
+
+//Create User API
+router.post('/createUser',middlewareController.isFreeAppUserInHeader,UserController.createUser)
+
+//Product API
+
+router.post("/assignProduct",productcontoller.assignProdcut)
+
+//OrderAPT
+
+router.post("/placeorder",middlewareController.isFreeAppUserInHeader,middlewareController.validateUserId,middlewareController.validateProductId,OrderController.placeOrder)
+
+
+
+
+
 
 
 
