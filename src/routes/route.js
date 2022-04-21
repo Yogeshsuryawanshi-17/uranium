@@ -53,9 +53,6 @@ router.get("/test-me", function (req, res) {
 
 
 
-
-
-
 //Create User API
 router.post('/createUser',middlewareController.isFreeAppUser,UserController.createUser)
 router.get('getuserData',UserController.getUsersData)

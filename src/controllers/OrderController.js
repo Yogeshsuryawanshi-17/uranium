@@ -1,7 +1,12 @@
 const req = require("express/lib/request")
-const ProductModel= require("../models/OrderModel")
+const ProductModel= require("../models/Productmodel")
 const userModel = require("../models/userModel")
+const orderModel = require("../models/OrderModel")
 
+
+const getCurrentDate = () => {
+    const date = new Date()
+    return date.getDate()+"/" + (date.getMonth()+1)+ "/"+ date.getFullYear()}
 
 
 const placeOrder = async function(req,res){
@@ -29,24 +34,24 @@ const placeOrder = async function(req,res){
             const savedData = await orderModel.create(order)
             return res.send({msg : savedData})
         }
-        // else {
-        //     const amount = isProductValid.price;
-        //     let  balance = isUserValid.balance;
-        //       if(balance<amount){
-        //       return res.send("Insufficient Balance")
-        // }
-        //       balance = balance-amount;
-        //       const updateBalance = await userModel.updateOne({_id:isUserValid["_id"]},{$set:{balance:balance}})
-        //       order = {
-        //           user_id :req.body.user_id,
-        //           product_id:req.body.product_id,
-        //           amount:amount,
-        //           isFreeAppUser:false,
-        //           date: getCurrentDate()
-        //       }
-        //       const savedData = await orderModel.create(order)
-        //       return res.send({msg : savedData})
-        //   }
+        else {
+            const amount = isProductValid.price;
+            let  balance = isUserValid.balance;
+              if(balance<amount){
+              return res.send("Insufficient Balance")
+        }
+              balance = balance-amount;
+              const updateBalance = await userModel.updateOne({_id:isUserValid["_id"]},{$set:{balance:balance}})
+              order = {
+                  user_id :req.body.user_id,
+                  product_id:req.body.product_id,
+                  amount:amount,
+                  isFreeAppUser:false,
+                  date: getCurrentDate()
+              }
+              const savedData = await orderModel.create(order)
+              return res.send({msg : savedData})
+          }
 
 }
 const getAllOrders = async (req,res) => {
