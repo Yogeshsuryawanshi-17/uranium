@@ -10,4 +10,11 @@ const assignProdcut = async function(req,res){
     res.send({msg:savedData});
 }
 
+
+const getProducts = async (req,res) => {
+    const getData =  await ProductModel.find().select({name:1,price:1})
+   return  res.send({msg : getData})
+}
+
+module.exports.getProducts = getProducts
 module.exports.assignProdcut =assignProdcut

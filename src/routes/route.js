@@ -57,22 +57,18 @@ router.get("/test-me", function (req, res) {
 
 
 //Create User API
-router.post('/createUser',middlewareController.isFreeAppUserInHeader,UserController.createUser)
+router.post('/createUser',middlewareController.isFreeAppUser,UserController.createUser)
+router.get('getuserData',UserController.getUsersData)
 
 //Product API
 
 router.post("/assignProduct",productcontoller.assignProdcut)
+router.get("/products",productcontoller.getProducts)
+
 
 //OrderAPT
 
-router.post("/placeorder",middlewareController.isFreeAppUserInHeader,middlewareController.validateUserId,middlewareController.validateProductId,OrderController.placeOrder)
-
-
-
-
-
-
-
-
+router.post("/placeorder",middlewareController.isFreeAppUser,OrderController.placeOrder)
+router.get('/orders',OrderController.getAllOrders)
 
 module.exports = router;
