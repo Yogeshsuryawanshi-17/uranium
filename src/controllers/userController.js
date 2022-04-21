@@ -11,6 +11,8 @@ const createUser = async function (abcd, xyz) {
   xyz.send({ msg: savedData });
 };
 
+
+
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
@@ -41,6 +43,7 @@ const loginUser = async function (req, res) {
 };
 
 const getUserData = async function (req, res) {
+
   let token = req.headers["x-Auth-token"];
   if (!token) token = req.headers["x-auth-token"];
 
@@ -48,7 +51,7 @@ const getUserData = async function (req, res) {
   if (!token) return res.send({ status: false, msg: "token must be present" });
 
   console.log(token);
-  
+
   // If a token is present then decode the token with verify function
   // verify takes two inputs:
   // Input 1 is the token to be decoded
@@ -67,10 +70,10 @@ const getUserData = async function (req, res) {
 };
 
 const updateUser = async function (req, res) {
-// Do the same steps here:
-// Check if the token is present
-// Check if the token present is a valid token
-// Return a different error message in both these cases
+  // Do the same steps here:
+  // Check if the token is present
+  // Check if the token present is a valid token
+  // Return a different error message in both these cases
 
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
