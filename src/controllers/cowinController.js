@@ -9,7 +9,7 @@ let getStates = async function (req, res) {
             url: 'https://cdn-api.co-vin.in/api/v2/admin/location/states'
         }
         let result = await axios(options);
-        console.log(result)
+        //console.log(result)
         let data = result.data
         res.status(200).send({ msg: data, status: true })
     }
@@ -78,8 +78,29 @@ let getOtp = async function (req, res) {
     }
 }
 
+const findbyDistrictId = async function(req,res){
+
+    try {
+        let District_Id = req.query.district_id
+        let date = req.query.date
+        console.log(`query params are: ${District_Id} ${date}`)
+        var options = {
+            method: "get",
+            url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${District_Id}&date=${date}`
+        }
+        let result = await axios(options)
+        console.log(result.data)
+        res.status(200).send({ msg: result.data })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).send({ msg: err.message })
+    }
+
+}
 
 module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
 module.exports.getByPin = getByPin
 module.exports.getOtp = getOtp
+module.exports.findbyDistrictId = findbyDistrictId
