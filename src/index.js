@@ -1,19 +1,28 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-
+const mongoose = require('mongoose')
 const route = require('./routes/route.js');
 
 const app = express();
 
-const multer= require("multer");
+const multer = require("multer");
 const { AppConfig } = require('aws-sdk');
+
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use( multer().any())
+app.use(multer().any())
+
+mongoose.connect('mongodb+srv://Uranium-Batch:aruSjkdGdfhc9MRK@functionup.eel5r.mongodb.net/group38Database?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+})
+    .then(() => { console.log('Connected to MongoDB') })
+    .catch(err => { console.log('Error connecting to MongoDB: ' + err) });
 
 app.use('/', route);
 
-app.listen(process.env.PORT || 3000, function() {
+app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
